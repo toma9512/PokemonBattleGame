@@ -67,4 +67,12 @@ public class Pokemon {
     public void setHp(int damage) {
         hp = Math.max(hp-damage, 0);
     }
+
+    public String getType1() {
+        return type1;
+    }
+
+    public String getType2() {
+        return type2;
+    }
 }
