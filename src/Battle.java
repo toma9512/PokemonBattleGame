@@ -91,14 +91,29 @@ public class Battle {
                 System.out.println("4. "+attacker.getSkill4().name);
                 System.out.print("입력 >> ");
                 n = sc.nextInt();
-                attack(attacker, target, n);
-                showStatus();
 
-                if (!target.isAlive()) break;
+                // 선공권 결정(0이면 내가 선공)
+                int firstAttack = 0;
+                if (attacker.getSpeed() == target.getSpeed()) {
+                    firstAttack = (int) (Math.random()*2);
+                } else if (attacker.getSpeed() < target.getSpeed()) {
+                    firstAttack = 1;
+                }
 
                 int random = (int) (Math.random()*4)+1;
-                attack(target, attacker, random);
-                showStatus();
+                if (firstAttack == 0) {
+                    attack(attacker, target, n);
+                    showStatus();
+                    if (!target.isAlive() ) break;
+                    attack(target, attacker, random);
+                    showStatus();
+                } else {
+                    attack(target, attacker, random);
+                    showStatus();
+                    if (!attacker.isAlive() ) break;
+                    attack(attacker, target, n);
+                    showStatus();
+                }
             }
 
             else if (n==2) {

@@ -7,6 +7,7 @@ public class Pokemon {
     protected int hp;
     protected int attack;
     protected int defense;
+    protected int speed;
     protected String type1;
     protected String type2;
     protected Skill skill1;
@@ -14,12 +15,13 @@ public class Pokemon {
     protected Skill skill3;
     protected Skill skill4;
 
-    public Pokemon(String name, int hp, int attack, int defense, String type1, String type2,
+    public Pokemon(String name, int hp, int attack, int defense, int speed, String type1, String type2,
                    Skill skill1, Skill skill2, Skill skill3, Skill skill4) {
         this.name = name;
         this.hp = hp;
         this.attack = attack;
         this.defense = defense;
+        this.speed = speed;
         this.type1 = type1;
         this.type2 = type2;
         this.skill1 = skill1;
@@ -62,6 +64,10 @@ public class Pokemon {
 
     public int getDefense() {
         return defense;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 
     public void setHp(int damage) {
