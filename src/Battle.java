@@ -6,10 +6,10 @@ import java.util.*;
 public class Battle {
     Pokemon attacker;
     Pokemon target;
-    private final List<String> TYPE = Arrays.asList(new String[]
+    private final List<String> TYPE = new ArrayList<>(Arrays.asList(new String[]
             {"노말","불꽃","물","풀","전기","얼음",
             "격투","독","땅","비행","에스퍼","벌레",
-            "바위","고스트","드래곤","악","강철","페어리"});
+            "바위","고스트","드래곤","악","강철","페어리"}));
 
     private final double[][] TYPE_EFFECTIVE = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0, 1, 1, 0.5, 1},
@@ -75,9 +75,13 @@ public class Battle {
         System.out.println("야생의 "+target.getName()+"이 나타났다!");
         boolean runAway = false;
         while (attacker.isAlive() && target.isAlive()) {
-            System.out.println("1. 공격\n2. 도망친다");
+            System.out.println("1. 공격\n4. 도망친다");
             System.out.print("입력 >> ");
             int n = sc.nextInt();
+            if (n<=0 || n>4) {
+                System.out.println("잘못된 입력!");
+                continue;
+            }
 
             if (n == 1) {
                 System.out.print("1. "+attacker.getSkill1().name);
@@ -86,6 +90,10 @@ public class Battle {
                 System.out.println(" 4. "+attacker.getSkill4().name);
                 System.out.print("입력 >> ");
                 n = sc.nextInt();
+                if (n<=0 || n>4) {
+                    System.out.println("잘못된 입력!");
+                    continue;
+                }
 
                 // 선공권 결정(0이면 내가 선공)
                 int firstAttack = 0;
@@ -95,14 +103,14 @@ public class Battle {
                     firstAttack = 1;
                 }
 
-                int random = (int) (Math.random()*4)+1;
-                if (firstAttack == 0) {
+                int random = (int) (Math.random()*4)+1; // 상대 기술 랜덤
+                if (firstAttack == 0) { // 선공
                     attack(attacker, target, n);
                     showStatus();
                     if (!target.isAlive() ) break;
                     attack(target, attacker, random);
                     showStatus();
-                } else {
+                } else { // 후공
                     attack(target, attacker, random);
                     showStatus();
                     if (!attacker.isAlive() ) break;
@@ -111,7 +119,7 @@ public class Battle {
                 }
             }
 
-            else if (n==2) {
+            else if (n==4) {
                 runAway = true;
                 System.out.println("도망쳤다!");
                 break;

@@ -9,11 +9,20 @@ public class Main {
         };
         System.out.println("포켓몬 선택");
         for (int i=0; i<arr.length; i++) {
-            System.out.println((i+1)+". "+arr[i].getName());
+            System.out.print((i+1)+". "+arr[i].getName()+" ");
+            if (i!=0 && i%5==0) System.out.println();
         }
-        System.out.print("입력 >> ");
         Scanner sc = new Scanner(System.in);
-        int select = sc.nextInt()-1;
+        int select;
+        while (true) {
+            System.out.print("입력 >> ");
+            select = sc.nextInt() - 1;
+            if (select <= 0 || select >= arr.length) {
+                System.out.println("잘못된 입력!");
+                continue;
+            }
+            break;
+        }
         int random = -1;
         while (random == -1 || select == random) {
             random = (int) (Math.random() * arr.length);
