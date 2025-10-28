@@ -46,16 +46,6 @@ public class Battle {
         else if (n==3) skill = attacker.getSkill3();
         else skill = attacker.getSkill4();
         System.out.println(attacker.getName()+"의 "+skill.name+" 공격!");
-        int damage = (int) (attacker.getAttack()*skill.power*effective(attacker, target, n))/(target.getDefense()*5);
-        target.setHp(damage);
-    }
-
-    public double effective(Pokemon attacker, Pokemon target, int n) {
-        Skill skill;
-        if (n==1) skill = attacker.getSkill1();
-        else if (n==2) skill = attacker.getSkill2();
-        else if (n==3) skill = attacker.getSkill3();
-        else skill = attacker.getSkill4();
 
         int attackType = TYPE.indexOf(skill.type);
         int defenseType1 = TYPE.indexOf(target.getType1());
@@ -70,7 +60,8 @@ public class Battle {
         if (attackType == TYPE.indexOf(attacker.getType1()) // 자속 보정
             || attackType == TYPE.indexOf(attacker.getType2())) result *= 1.5;
 
-        return result;
+        int damage = (int) (attacker.getAttack()*skill.power*result)/(target.getDefense()*5);
+        target.setHp(damage);
     }
 
     public void showStatus() {
