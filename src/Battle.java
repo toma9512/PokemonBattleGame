@@ -61,10 +61,14 @@ public class Battle {
         int defenseType1 = TYPE.indexOf(target.getType1());
         int defenseType2 = TYPE.indexOf(target.getType2());
         double result = TYPE_EFFECTIVE[attackType][defenseType1];
-        if (defenseType2>=0) result *= TYPE_EFFECTIVE[attackType][defenseType2];
+        if (defenseType2>=0) result *= TYPE_EFFECTIVE[attackType][defenseType2]; // 두번째 타입이 있다면
+
         if (result>1) System.out.println("효과가 굉장했다!");
         else if (result==0) System.out.println("효과가 없는 것 같다...");
         else if (result<1) System.out.println("효과가 별로인 것 같다...");
+
+        if (attackType == TYPE.indexOf(attacker.getType1()) // 자속 보정
+            || attackType == TYPE.indexOf(attacker.getType2())) result *= 1.5;
 
         return result;
     }
@@ -85,10 +89,10 @@ public class Battle {
             int n = sc.nextInt();
 
             if (n == 1) {
-                System.out.println("1. "+attacker.getSkill1().name);
-                System.out.println("2. "+attacker.getSkill2().name);
-                System.out.println("3. "+attacker.getSkill3().name);
-                System.out.println("4. "+attacker.getSkill4().name);
+                System.out.print("1. "+attacker.getSkill1().name);
+                System.out.println(" 2. "+attacker.getSkill2().name);
+                System.out.print("3. "+attacker.getSkill3().name);
+                System.out.println(" 4. "+attacker.getSkill4().name);
                 System.out.print("입력 >> ");
                 n = sc.nextInt();
 
@@ -125,7 +129,7 @@ public class Battle {
 
         if (!runAway) {
             System.out.println("배틀 종료");
-            System.out.println(attacker.isAlive() ? "승리" : "패배");
+            System.out.println(attacker.isAlive() ? "승리!" : "패배..");
         }
     }
 }
