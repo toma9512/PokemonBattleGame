@@ -5,13 +5,15 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Pokemon[] arr = {
-                new Venusaur(), new Charizard(), new Blastoise()
+                new Venusaur(), new Charizard(), new Blastoise(), new Butterfree(), new BeeDrill(),
+                new Pidgeot()
         };
         System.out.println("포켓몬 선택");
         for (int i=0; i<arr.length; i++) {
             System.out.print((i+1)+". "+arr[i].getName()+" ");
-            if (i!=0 && i%5==0) System.out.println();
+            if (i%5==4) System.out.println();
         }
+        System.out.println();
         Scanner sc = new Scanner(System.in);
         int select;
         while (true) {
