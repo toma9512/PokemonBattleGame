@@ -30,7 +30,9 @@ public class Battle {
     }
 
     public void start() {
-        System.out.println("===배틀 시작!===");
+        System.out.println(attacker.getName()+"을 선택하셨습니다");
+        System.out.println("=== 배틀 시작! ===");
+        System.out.println("야생의 "+target.getName()+"이 나타났다!");
         boolean runAway = false;
         while (attacker.isAlive() && target.isAlive()) {
             System.out.println("1. 공격\n2. 도망친다");
